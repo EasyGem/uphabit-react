@@ -1,17 +1,10 @@
 import React, { useState, useEffect } from 'react';
-// import {
-//   Button, DatePicker, Input, version,
-// } from 'antd';
-import 'antd/dist/antd.css';
-
 import Board from './components/Board/Board';
 import getBoards from './requests/boards/getBoards';
-
+import 'antd/dist/antd.css';
 import './App.css';
 
 function App() {
-  // const [num, setNum] = useState(1);
-  // const [state, setState] = useState({ name: 'Alex', lastName: 'Gusev' });
   const [boards, setBoards] = useState([]);
 
   useEffect(() => {
@@ -31,7 +24,7 @@ function App() {
 
   const updateHabit = (habit, board) => {
     const habitIndex = board.habits.findIndex((e) => e.id === habit.id);
-    board.habits.slice(habitIndex, 1, habit);
+    board.habits.splice(habitIndex, 1, habit);
     updateBoard(board);
   };
 
@@ -59,7 +52,7 @@ function App() {
         { boards.map((board) => (
           <Board
             toggleDay={(habit, dayIndex) => toggleDay(habit, dayIndex, board)}
-            setField={(fieldName, value, habit) => updateField(habit, fieldName, value, board)}
+            updateField={(fieldName, value, habit) => updateField(habit, fieldName, value, board)}
             removeHabit={(habit) => removeHabit(habit, board)}
             commonProps={board}
           />
